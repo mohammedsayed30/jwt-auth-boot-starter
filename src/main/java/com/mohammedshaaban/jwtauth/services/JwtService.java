@@ -171,7 +171,13 @@ public class JwtService {
 	 * @return {@code true} if the subject matches and the token is not expired
 	 */
 	public boolean isTokenValid(String token, UserDetails userDetails) {
-		String userName = extractUsername(token);
-		return (userName.equals(userDetails.getUsername())) && !isTokenExpired(token);
+
+		try {
+			String userName = extractUsername(token);
+			return (userName.equals(userDetails.getUsername())) && !isTokenExpired(token);
+		} catch (Exception e) {
+			// If the token is invalid or cannot be parsed, consider it invalid
+			return false;
+		}
 	}
 }

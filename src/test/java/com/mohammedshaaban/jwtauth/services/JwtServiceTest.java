@@ -131,4 +131,25 @@ class JwtServiceTest {
         assertFalse(jwtService.isTokenExpired(token));
     }
 
+    @Test
+    void isTokenValid_returnsTrueForValidToken() {
+
+        String token = jwtService.generateToken(USER_DETAILS);
+
+        assertNotNull(token);
+        assertTrue(jwtService.isTokenValid(token, USER_DETAILS));
+    }
+
+    @Test
+    void isTokenValid_returnsFalseForNonValidToken() {
+
+        String token = jwtService.generateToken(USER_DETAILS);
+
+        assertNotNull(token);
+        // change the token to make it invalid
+        String invalidToken = token + "invalid";
+
+        assertFalse(jwtService.isTokenValid(invalidToken, USER_DETAILS));
+    }
+
 }

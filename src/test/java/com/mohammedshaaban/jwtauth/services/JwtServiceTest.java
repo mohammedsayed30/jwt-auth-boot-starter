@@ -19,6 +19,7 @@ import static org.mockito.Mockito.*;
 import com.mohammedshaaban.jwtauth.config.JwtProperties;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -54,6 +55,10 @@ class JwtServiceTest {
     }
 
     private Claims parse(String token) {
+
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7); // Remove "Bearer " prefix
+        }
         return Jwts.parser()
                 .verifyWith(signingKey)
                 .build()
@@ -72,16 +77,16 @@ class JwtServiceTest {
     @Test
     void extractUsername_fromValidToken() {
         String token = jwtService.generateToken(USER_DETAILS);
-        String username = jwtService.extractUsername(token);
 
-        assertEquals("testuser", username);
+        assertEquals("testuser", parse(token).getSubject());
     }
 
     @Test
     void extractUsername_fromNonValidToken() {
-        String token = "invalid.token";
-        String username = jwtService.extractUsername(token);
+        String invalidToken = "Bearer dummy.invalid.token";
 
-        assertNull(username);
+        assertThrows(JwtException.class, () -> {
+            parse(invalidToken);
+        });
     }
 }

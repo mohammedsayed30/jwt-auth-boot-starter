@@ -76,4 +76,12 @@ class JwtServiceTest {
 
         assertEquals("testuser", username);
     }
+
+    @Test
+    void extractUsername_fromNonValidToken() {
+        String token = "invalid.token";
+        String username = jwtService.extractUsername(token);
+
+        assertNull(username);
+    }
 }

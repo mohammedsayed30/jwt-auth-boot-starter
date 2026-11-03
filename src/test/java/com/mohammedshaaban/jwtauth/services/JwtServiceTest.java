@@ -68,6 +68,9 @@ class JwtServiceTest {
                 .getPayload();
     }
 
+    /**
+     * Verifies that a generated token uses the compact JWT format.
+     */
     @Test
     void generateToken_returnsCompactJwt() {
         String token = jwtService.generateToken(USER_DETAILS);
@@ -76,6 +79,9 @@ class JwtServiceTest {
         assertEquals(3, token.split("\\.").length); // header.payload.signature
     }
 
+    /**
+     * Verifies that the username is extracted from a valid token's subject.
+     */
     @Test
     void extractUsername_fromValidToken() {
         String token = jwtService.generateToken(USER_DETAILS);
@@ -84,12 +90,19 @@ class JwtServiceTest {
         assertEquals("testuser", username);
     }
 
+    /**
+     * Verifies that malformed token input is rejected by the JWT parser.
+     */
     @Test
     void extractUsername_fromNonValidToken() {
         String invalidToken = "Bearer dummy.invalid.token";
         assertThrows(JwtException.class, () -> jwtService.extractUsername(invalidToken));
     }
 
+    /**
+     * Verifies that a generated token has an expiration matching the configured
+     * lifetime.
+     */
     @Test
     void extractExpiration_fromValidToken() {
         String token = jwtService.generateToken(USER_DETAILS);
@@ -108,6 +121,9 @@ class JwtServiceTest {
 
     }
 
+    /**
+     * Verifies that a token with an immediate expiration is reported as expired.
+     */
     @Test
     void isTokenExpired_returnsTrueForExpiredToken() {
         // Create a token that expires immediately
@@ -122,6 +138,9 @@ class JwtServiceTest {
         assertTrue(immediateExpiryService.isTokenExpired(token));
     }
 
+    /**
+     * Verifies that a token within its configured lifetime is not expired.
+     */
     @Test
     void isTokenExpired_returnsFalseForValidToken() {
 
@@ -131,6 +150,9 @@ class JwtServiceTest {
         assertFalse(jwtService.isTokenExpired(token));
     }
 
+    /**
+     * Verifies that a signed, unexpired token for the user is valid.
+     */
     @Test
     void isTokenValid_returnsTrueForValidToken() {
 
@@ -140,6 +162,9 @@ class JwtServiceTest {
         assertTrue(jwtService.isTokenValid(token, USER_DETAILS));
     }
 
+    /**
+     * Verifies that a token with an altered signature is not valid.
+     */
     @Test
     void isTokenValid_returnsFalseForNonValidToken() {
 

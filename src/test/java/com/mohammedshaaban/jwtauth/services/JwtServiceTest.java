@@ -77,16 +77,14 @@ class JwtServiceTest {
     @Test
     void extractUsername_fromValidToken() {
         String token = jwtService.generateToken(USER_DETAILS);
+        String username = jwtService.extractUsername(token);
 
-        assertEquals("testuser", parse(token).getSubject());
+        assertEquals("testuser", username);
     }
 
     @Test
     void extractUsername_fromNonValidToken() {
         String invalidToken = "Bearer dummy.invalid.token";
-
-        assertThrows(JwtException.class, () -> {
-            parse(invalidToken);
-        });
+        assertThrows(JwtException.class, () -> jwtService.extractUsername(invalidToken));
     }
 }

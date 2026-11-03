@@ -107,4 +107,28 @@ class JwtServiceTest {
         assertTrue(difference < 2000, "Token expiration should be approximately 30 minutes from creation");
 
     }
+
+    @Test
+    void isTokenExpired_returnsTrueForExpiredToken() {
+        // Create a token that expires immediately
+        JwtProperties jwtProperties = new JwtProperties();
+        jwtProperties.setSecret(SECRET);
+        jwtProperties.setExpirationTime(Duration.ZERO); // immediate expiration
+
+        JwtService immediateExpiryService = new JwtService(jwtProperties);
+        String token = immediateExpiryService.generateToken(USER_DETAILS);
+
+        assertNotNull(token);
+        assertTrue(immediateExpiryService.isTokenExpired(token));
+    }
+
+    @Test
+    void isTokenExpired_returnsFalseForValidToken() {
+
+        String token = jwtService.generateToken(USER_DETAILS);
+
+        assertNotNull(token);
+        assertFalse(jwtService.isTokenExpired(token));
+    }
+
 }

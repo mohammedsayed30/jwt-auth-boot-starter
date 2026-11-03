@@ -92,7 +92,7 @@ public class JwtService {
 	 * @param token compact JWT to parse
 	 * @return the token expiration time
 	 */
-	private Date extractExpiration(String token) {
+	Date extractExpiration(String token) {
 		return extractClaim(token, claims -> claims.getExpiration());
 	}
 

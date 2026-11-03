@@ -12,9 +12,11 @@ import javax.crypto.SecretKey;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Base64;
 import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
+import java.util.Date;
 
 import com.mohammedshaaban.jwtauth.config.JwtProperties;
 
@@ -86,5 +88,23 @@ class JwtServiceTest {
     void extractUsername_fromNonValidToken() {
         String invalidToken = "Bearer dummy.invalid.token";
         assertThrows(JwtException.class, () -> jwtService.extractUsername(invalidToken));
+    }
+
+    @Test
+    void extractExpiration_fromValidToken() {
+        String token = jwtService.generateToken(USER_DETAILS);
+        Date expiration = jwtService.extractExpiration(token);
+        assertNotNull(expiration);
+
+        // Calculate expected expiration (approx. 30 minutes from now)
+        long currentTime = System.currentTimeMillis();
+        long expirationTime = expiration.getTime();
+        long expectedDurationMillis = Duration.ofMinutes(30).toMillis();
+
+        // Verify that the expiration is roughly 30 minutes away (allowing a 2-second
+        // test execution buffer)
+        long difference = Math.abs((expirationTime - currentTime) - expectedDurationMillis);
+        assertTrue(difference < 2000, "Token expiration should be approximately 30 minutes from creation");
+
     }
 }

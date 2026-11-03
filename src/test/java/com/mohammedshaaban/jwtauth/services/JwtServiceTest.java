@@ -35,9 +35,9 @@ class JwtServiceTest {
     @BeforeEach
     void setUp() {
         // Mock JwtProperties to return dummy test secret and expiration time
-        JwtProperties jwtProperties = mock(JwtProperties.class);
-        when(jwtProperties.getSecret()).thenReturn(SECRET);
-        when(jwtProperties.getExpirationTime()).thenReturn(EXPIRATION);
+        JwtProperties jwtProperties = new JwtProperties();
+        jwtProperties.setSecret(SECRET);
+        jwtProperties.setExpirationTime(EXPIRATION);
 
         // Create JwtService with mocked properties
         jwtService = new JwtService(jwtProperties);

@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.User;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collections;
+
+import javax.crypto.SecretKey;
+
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Base64;
@@ -14,6 +17,11 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
 
 import com.mohammedshaaban.jwtauth.config.JwtProperties;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 
 class JwtServiceTest {
 
@@ -31,6 +39,7 @@ class JwtServiceTest {
             .build();
 
     private JwtService jwtService;
+    private SecretKey signingKey;
 
     @BeforeEach
     void setUp() {
@@ -41,6 +50,15 @@ class JwtServiceTest {
 
         // Create JwtService with mocked properties
         jwtService = new JwtService(jwtProperties);
+        signingKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET));
+    }
+
+    private Claims parse(String token) {
+        return Jwts.parser()
+                .verifyWith(signingKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
     @Test
@@ -49,5 +67,13 @@ class JwtServiceTest {
 
         assertNotNull(token);
         assertEquals(3, token.split("\\.").length); // header.payload.signature
+    }
+
+    @Test
+    void extractUsername_fromValidToken() {
+        String token = jwtService.generateToken(USER_DETAILS);
+        String username = jwtService.extractUsername(token);
+
+        assertEquals("testuser", username);
     }
 }

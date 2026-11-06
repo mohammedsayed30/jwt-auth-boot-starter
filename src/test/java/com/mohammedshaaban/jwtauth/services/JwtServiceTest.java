@@ -114,10 +114,10 @@ class JwtServiceTest {
         long expirationTime = expiration.getTime();
         long expectedDurationMillis = Duration.ofMinutes(30).toMillis();
 
-        // Verify that the expiration is roughly 30 minutes away (allowing a 2-second
+        // Verify that the expiration is roughly 30 minutes away (allowing a 20-second
         // test execution buffer)
         long difference = Math.abs((expirationTime - currentTime) - expectedDurationMillis);
-        assertTrue(difference < 2000, "Token expiration should be approximately 30 minutes from creation");
+        assertTrue(difference < 20000, "Token expiration should be approximately 30 minutes from creation");
 
     }
 

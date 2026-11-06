@@ -87,4 +87,19 @@ class JwtAuthenticationFilterTest {
         assertNull(SecurityContextHolder.getContext().getAuthentication());
     }
 
+    @Test
+    void doFilterInternal_passNoHeader() throws Exception {
+        when(request.getHeader("Authorization")).thenReturn(null);
+
+        // Call the method under test
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+
+        // Verify that the filter chain was called
+        verify(filterChain).doFilter(request, response);
+        // Verify that neither jwt service or user datails service were called
+        verifyNoInteractions(jwtService, userDetailsService);
+        // Verify that the security context was not set
+        assertNull(SecurityContextHolder.getContext().getAuthentication());
+    }
+
 }

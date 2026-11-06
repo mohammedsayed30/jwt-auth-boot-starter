@@ -1,5 +1,6 @@
 package com.mohammedshaaban.jwtauth.filters;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.User;
@@ -47,6 +48,11 @@ class JwtAuthenticationFilterTest {
 
     @InjectMocks
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @AfterEach
+    void clearContext() {
+        SecurityContextHolder.clearContext(); // static state, must be reset between tests
+    }
 
     @Test
     void doFilterInternal_passValidToken() throws Exception {

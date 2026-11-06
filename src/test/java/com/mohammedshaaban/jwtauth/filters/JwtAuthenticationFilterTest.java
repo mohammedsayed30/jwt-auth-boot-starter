@@ -22,6 +22,7 @@ import static org.mockito.Mockito.*;
 import java.util.Collections;
 import org.springframework.security.core.context.SecurityContextHolder;
 import static org.junit.jupiter.api.Assertions.*;
+import io.jsonwebtoken.JwtException;
 
 @ExtendWith(MockitoExtension.class)
 class JwtAuthenticationFilterTest {
@@ -70,6 +71,20 @@ class JwtAuthenticationFilterTest {
         verify(filterChain).doFilter(request, response);
         // Verify that the security context was set with the authenticated user
         assertNotNull(SecurityContextHolder.getContext().getAuthentication());
+    }
+
+    @Test
+    void doFilterInternal_passInValidToken() throws Exception {
+        when(request.getHeader("Authorization")).thenReturn("Bearer bad.token");
+        when(jwtService.extractUsername("bad.token")).thenThrow(new JwtException("Invalid token"));
+
+        // Call the method under test
+        jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
+
+        // Verify that the filter chain was called
+        verify(filterChain).doFilter(request, response);
+        // Verify that the security context was not set
+        assertNull(SecurityContextHolder.getContext().getAuthentication());
     }
 
 }

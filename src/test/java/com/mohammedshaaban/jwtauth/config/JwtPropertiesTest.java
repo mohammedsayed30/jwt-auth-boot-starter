@@ -85,4 +85,15 @@ class JwtPropertiesTest {
         assertTrue(violations.stream()
                 .anyMatch(v -> v.getMessage().equals("JWT expiration time must not be null")));
     }
+
+    @Test
+    @DisplayName("Test existing expiration time with missing secret for JwtProperties")
+    void testExistingExpirationWithInvalidSecret() {
+        Duration expirationTime = Duration.ofDays(1);
+        jwtProperties.setExpirationTime(expirationTime);
+        Set<ConstraintViolation<JwtProperties>> violations = validator.validate(jwtProperties);
+        assertFalse(violations.isEmpty());
+        assertTrue(violations.stream()
+                .anyMatch(v -> v.getMessage().equals("JWT secret key must not be blank")));
+    }
 }

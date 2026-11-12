@@ -67,6 +67,16 @@ class JwtPropertiesTest {
     }
 
     @Test
+    @DisplayName("Test existing expiration time for JwtProperties")
+    void testExistingExpiration() {
+        String validSecret = "abcdefg6f1234567890123456789012g";
+        Duration expirationTime = Duration.ofDays(1);
+        jwtProperties.setExpirationTime(expirationTime);
+        jwtProperties.setSecret(validSecret);
+        assertTrue(validator.validate(jwtProperties).isEmpty());
+    }
+
+    @Test
     @DisplayName("Test null expiration time for JwtProperties")
     void testNullExpiration() {
         jwtProperties.setExpirationTime(null);

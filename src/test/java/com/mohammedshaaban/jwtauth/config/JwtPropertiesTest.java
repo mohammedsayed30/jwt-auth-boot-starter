@@ -45,11 +45,18 @@ class JwtPropertiesTest {
     }
 
     @Test
-    @DisplayName("Test valid secret key and expiration time for JwtProperties")
+    @DisplayName("Test valid secret key for JwtProperties")
     void testValidJwtProperties() {
         String validSecret = "abcdefg6f1234567890123456789012g"; // 32 characters
         jwtProperties.setSecret(validSecret); // 32 characters
-        Set<ConstraintViolation<JwtProperties>> violations = validator.validate(jwtProperties);
-        assertTrue(violations.isEmpty());
+        assertTrue(validator.validate(jwtProperties).isEmpty());
+    }
+
+    @Test
+    @DisplayName("Test invalid secret key for JwtProperties")
+    void testInvalidJwtProperties() {
+        String invalidSecret = "abcdefg6f1234567890123456789012"; // 31 characters
+        jwtProperties.setSecret(invalidSecret);
+        assertFalse(validator.validate(jwtProperties).isEmpty());
     }
 }

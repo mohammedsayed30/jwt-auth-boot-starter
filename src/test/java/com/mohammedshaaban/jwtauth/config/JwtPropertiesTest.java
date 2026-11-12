@@ -32,6 +32,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ConstraintViolation;
 import java.util.Set;
+import java.time.Duration;
 
 class JwtPropertiesTest {
 
@@ -46,7 +47,7 @@ class JwtPropertiesTest {
 
     @Test
     @DisplayName("Test valid secret key for JwtProperties")
-    void testValidJwtProperties() {
+    void testValidSecretKey() {
         String validSecret = "abcdefg6f1234567890123456789012g"; // 32 characters
         jwtProperties.setSecret(validSecret); // 32 characters
         assertTrue(validator.validate(jwtProperties).isEmpty());
@@ -54,9 +55,24 @@ class JwtPropertiesTest {
 
     @Test
     @DisplayName("Test invalid secret key for JwtProperties")
-    void testInvalidJwtProperties() {
+    void testInvalidSecretKey() {
         String invalidSecret = "abcdefg6f1234567890123456789012"; // 31 characters
         jwtProperties.setSecret(invalidSecret);
-        assertFalse(validator.validate(jwtProperties).isEmpty());
+        Set<ConstraintViolation<JwtProperties>> violations = validator.validate(jwtProperties);
+
+        assertFalse(violations.isEmpty());
+
+        assertTrue(violations.stream()
+                .anyMatch(v -> v.getMessage().equals("JWT secret key must be at least 32 characters long")));
+    }
+
+    @Test
+    @DisplayName("Test null expiration time for JwtProperties")
+    void testNullExpiration() {
+        jwtProperties.setExpirationTime(null);
+        Set<ConstraintViolation<JwtProperties>> violations = validator.validate(jwtProperties);
+        assertFalse(violations.isEmpty());
+        assertTrue(violations.stream()
+                .anyMatch(v -> v.getMessage().equals("JWT expiration time must not be null")));
     }
 }

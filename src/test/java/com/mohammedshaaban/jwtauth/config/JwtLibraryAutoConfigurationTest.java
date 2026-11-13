@@ -39,4 +39,16 @@ class JwtLibraryAutoConfigurationTest {
         });
     }
 
+    @Test
+    @DisplayName("Application's own JwtService replaces the default")
+    void userDefinedJwtServiceWins() {
+        JwtService custom = mock(JwtService.class);
+
+        runner.withBean(JwtService.class, () -> custom)
+                .run(context -> {
+                    assertThat(context).hasSingleBean(JwtService.class);
+                    assertThat(context.getBean(JwtService.class)).isSameAs(custom);
+                });
+    }
+
 }

@@ -1,1 +1,1 @@
-com.mohammedshaaban.jwtauth.config.JwtLibraryAutoConfiguration
+io.github.mohammedshaaban.jwtauth.config.JwtLibraryAutoConfiguration

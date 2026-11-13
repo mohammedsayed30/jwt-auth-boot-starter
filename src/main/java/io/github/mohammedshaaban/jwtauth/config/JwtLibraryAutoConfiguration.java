@@ -1,4 +1,4 @@
-package com.github.mohammedshaaban.jwtauth.config;
+package io.github.mohammedshaaban.jwtauth.config;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.github.mohammedshaaban.jwtauth.filters.JwtAuthenticationFilter;
-import com.github.mohammedshaaban.jwtauth.services.JwtService;
+import io.github.mohammedshaaban.jwtauth.filters.JwtAuthenticationFilter;
+import io.github.mohammedshaaban.jwtauth.services.JwtService;
 
 /**
  * Configures the JWT services and servlet filter when Spring Security and the

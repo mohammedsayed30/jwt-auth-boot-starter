@@ -1,4 +1,4 @@
-package com.github.mohammedshaaban.jwtauth.filters;
+package io.github.mohammedshaaban.jwtauth.filters;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.github.mohammedshaaban.jwtauth.services.JwtService;
+import io.github.mohammedshaaban.jwtauth.services.JwtService;
 
 import io.jsonwebtoken.JwtException;
 

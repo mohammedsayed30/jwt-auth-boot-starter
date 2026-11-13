@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.github.mohammedshaaban.jwtauth</groupId>
+    <groupId>io.github.mohammedshaaban.jwtauth</groupId>
     <artifactId>jwt-auth-boot-starter</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>

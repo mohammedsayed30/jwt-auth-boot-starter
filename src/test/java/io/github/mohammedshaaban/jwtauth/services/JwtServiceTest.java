@@ -1,10 +1,10 @@
-package com.github.mohammedshaaban.jwtauth.services;
+package io.github.mohammedshaaban.jwtauth.services;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.github.mohammedshaaban.jwtauth.config.JwtProperties;
-import com.github.mohammedshaaban.jwtauth.services.JwtService;
+import io.github.mohammedshaaban.jwtauth.config.JwtProperties;
+import io.github.mohammedshaaban.jwtauth.services.JwtService;
 
 import org.springframework.security.core.userdetails.User;
 

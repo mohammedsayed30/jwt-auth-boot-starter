@@ -80,6 +80,8 @@ class JwtPropertiesTest {
     @DisplayName("Test null expiration time for JwtProperties")
     void testNullExpiration() {
         jwtProperties.setExpirationTime(null);
+        String validSecret = "abcdefg6f1234567890123456789012g";
+        jwtProperties.setSecret(validSecret);
         Set<ConstraintViolation<JwtProperties>> violations = validator.validate(jwtProperties);
         assertFalse(violations.isEmpty());
         assertTrue(violations.stream()

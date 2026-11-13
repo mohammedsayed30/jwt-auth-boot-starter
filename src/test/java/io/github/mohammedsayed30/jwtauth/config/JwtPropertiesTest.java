@@ -1,33 +1,9 @@
-package io.github.mohammedshaaban.jwtauth.config;
+package io.github.mohammedsayed30.jwtauth.config;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-
-import io.github.mohammedshaaban.jwtauth.config.JwtProperties;
-import io.github.mohammedshaaban.jwtauth.services.JwtService;
-
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import static org.mockito.Mockito.*;
-import java.util.Collections;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import static org.junit.jupiter.api.Assertions.*;
-import io.jsonwebtoken.JwtException;
-import org.springframework.boot.test.context.SpringBootTest;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ConstraintViolation;

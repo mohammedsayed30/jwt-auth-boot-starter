@@ -1,4 +1,4 @@
-package io.github.mohammedshaaban.jwtauth.config;
+package io.github.mohammedsayed30.jwtauth.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;

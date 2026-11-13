@@ -1,9 +1,8 @@
-package io.github.mohammedshaaban.jwtauth.services;
+package io.github.mohammedsayed30.jwtauth.services;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import io.github.mohammedshaaban.jwtauth.config.JwtProperties;
-
+import io.github.mohammedsayed30.jwtauth.config.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

@@ -1,11 +1,7 @@
-package io.github.mohammedshaaban.jwtauth.services;
+package io.github.mohammedsayed30.jwtauth.services;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import io.github.mohammedshaaban.jwtauth.config.JwtProperties;
-import io.github.mohammedshaaban.jwtauth.services.JwtService;
-
 import org.springframework.security.core.userdetails.User;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,20 +12,16 @@ import javax.crypto.SecretKey;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.time.Instant;
 import java.util.Base64;
 import org.junit.jupiter.api.BeforeEach;
-import static org.mockito.Mockito.*;
 import java.util.Date;
 
-import io.jsonwebtoken.Claims;
+import io.github.mohammedsayed30.jwtauth.config.JwtProperties;
 import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 class JwtServiceTest {
-
     // expiration time of 1 hour
     private static final Duration EXPIRATION = Duration.ofMinutes(30);
 
@@ -44,7 +36,6 @@ class JwtServiceTest {
             .build();
 
     private JwtService jwtService;
-    private SecretKey signingKey;
 
     @BeforeEach
     void setUp() {
@@ -55,19 +46,6 @@ class JwtServiceTest {
 
         // Create JwtService with mocked properties
         jwtService = new JwtService(jwtProperties);
-        signingKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET));
-    }
-
-    private Claims parse(String token) {
-
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7); // Remove "Bearer " prefix
-        }
-        return Jwts.parser()
-                .verifyWith(signingKey)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
     }
 
     /**

@@ -1,15 +1,10 @@
-package io.github.mohammedshaaban.jwtauth.filters;
+package io.github.mohammedsayed30.jwtauth.filters;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import io.github.mohammedshaaban.jwtauth.config.JwtProperties;
-import io.github.mohammedshaaban.jwtauth.filters.JwtAuthenticationFilter;
-import io.github.mohammedshaaban.jwtauth.services.JwtService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +18,8 @@ import static org.mockito.Mockito.*;
 import java.util.Collections;
 import org.springframework.security.core.context.SecurityContextHolder;
 import static org.junit.jupiter.api.Assertions.*;
+
+import io.github.mohammedsayed30.jwtauth.services.JwtService;
 import io.jsonwebtoken.JwtException;
 
 @ExtendWith(MockitoExtension.class)

@@ -1,4 +1,4 @@
-package io.github.mohammedshaaban.jwtauth.config;
+package io.github.mohammedsayed30.jwtauth.config;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -9,9 +9,8 @@ import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.WebApplicationContextRunner;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import io.github.mohammedshaaban.jwtauth.config.JwtLibraryAutoConfiguration;
-import io.github.mohammedshaaban.jwtauth.filters.JwtAuthenticationFilter;
-import io.github.mohammedshaaban.jwtauth.services.JwtService;
+import io.github.mohammedsayed30.jwtauth.filters.JwtAuthenticationFilter;
+import io.github.mohammedsayed30.jwtauth.services.JwtService;
 
 class JwtLibraryAutoConfigurationTest {
 

@@ -30,4 +30,13 @@ class JwtLibraryAutoConfigurationTest {
                 });
     }
 
+    @Test
+    @DisplayName("Does not register the filter without a UserDetailsService")
+    void noFilterWithoutUserDetailsService() {
+        runner.run(context -> {
+            assertThat(context).hasSingleBean(JwtService.class);
+            assertThat(context).doesNotHaveBean(JwtAuthenticationFilter.class);
+        });
+    }
+
 }

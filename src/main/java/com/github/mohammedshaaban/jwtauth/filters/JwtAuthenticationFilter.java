@@ -1,4 +1,4 @@
-package com.mohammedshaaban.jwtauth.filters;
+package com.github.mohammedshaaban.jwtauth.filters;
 
 import java.io.IOException;
 
@@ -10,13 +10,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.github.mohammedshaaban.jwtauth.services.JwtService;
+
 import io.jsonwebtoken.JwtException;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.mohammedshaaban.jwtauth.services.JwtService;
 
 /**
  * Authenticates servlet requests using a JWT supplied in the

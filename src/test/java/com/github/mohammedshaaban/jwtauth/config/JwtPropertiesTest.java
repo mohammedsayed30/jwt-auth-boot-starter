@@ -1,4 +1,4 @@
-package com.mohammedshaaban.jwtauth.config;
+package com.github.mohammedshaaban.jwtauth.config;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.mohammedshaaban.jwtauth.config.JwtProperties;
-import com.mohammedshaaban.jwtauth.services.JwtService;
+import com.github.mohammedshaaban.jwtauth.config.JwtProperties;
+import com.github.mohammedshaaban.jwtauth.services.JwtService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,6 +1,8 @@
-package com.mohammedshaaban.jwtauth.services;
+package com.github.mohammedshaaban.jwtauth.services;
 
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.github.mohammedshaaban.jwtauth.config.JwtProperties;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import javax.crypto.SecretKey;
-import com.mohammedshaaban.jwtauth.config.JwtProperties;
 
 /**
  * Creates signed JWTs and reads their claims using the configured signing

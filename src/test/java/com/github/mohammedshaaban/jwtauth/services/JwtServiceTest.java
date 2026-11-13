@@ -1,7 +1,11 @@
-package com.mohammedshaaban.jwtauth.services;
+package com.github.mohammedshaaban.jwtauth.services;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.github.mohammedshaaban.jwtauth.config.JwtProperties;
+import com.github.mohammedshaaban.jwtauth.services.JwtService;
+
 import org.springframework.security.core.userdetails.User;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,8 +21,6 @@ import java.util.Base64;
 import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
 import java.util.Date;
-
-import com.mohammedshaaban.jwtauth.config.JwtProperties;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

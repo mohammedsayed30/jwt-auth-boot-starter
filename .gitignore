@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+.mvn/
 
 ### Maven ###
 dependency-reduced-pom.xml

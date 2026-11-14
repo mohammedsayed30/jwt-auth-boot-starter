@@ -44,24 +44,28 @@ endpoints, and authorization rules. The starter only handles tokens.
 
 ## Installation
 
-The starter is not yet published to a public Maven repository, so install it
-from source:
+The starter is available on [Maven Central](https://central.sonatype.com/artifact/io.github.mohammedsayed30/jwt-auth-boot-starter), so you only need to add the dependency.
 
-```shell
-git clone https://github.com/mohammedsayed30/jwt_library.git
-cd YOUR_REPO
-mvn clean install
-```
-
-This installs the library into your local Maven repository (`~/.m2`). Then add
-it to your application's `pom.xml`:
+**Maven**
 
 ```xml
 <dependency>
-    <groupId>com.mohammedshaaban.jwtauth</groupId>
+    <groupId>io.github.mohammedsayed30</groupId>
     <artifactId>jwt-auth-boot-starter</artifactId>
     <version>1.0.0</version>
 </dependency>
+```
+
+**Gradle (Groovy)**
+
+```groovy
+implementation 'io.github.mohammedsayed30:jwt-auth-boot-starter:1.0.0'
+```
+
+**Gradle (Kotlin)**
+
+```kotlin
+implementation("io.github.mohammedsayed30:jwt-auth-boot-starter:1.0.0")
 ```
 
 Your application also needs a servlet web stack, usually:
